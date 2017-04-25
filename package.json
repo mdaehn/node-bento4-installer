@@ -1,0 +1,26 @@
+{
+  "name": "bento4-installer",
+  "version": "1.0.0",
+  "description": "Installs bento4 executables as a node module and provides a path to the bin folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markusdaehn/node-bento4-installer.git"
+  },
+  "keywords": [
+    "bento4",
+    "installer",
+    "hls",
+    "mpeg",
+    "dash"
+  ],
+  "author": "Markus Daehn <markus.daehn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markusdaehn/node-bento4-installer/issues"
+  },
+  "homepage": "https://github.com/markusdaehn/node-bento4-installer#readme"
+}
