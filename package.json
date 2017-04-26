@@ -4,7 +4,7 @@
   "description": "Installs bento4 executables as a node module and provides a path to the bin folder",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "mocha ./src/**/*.spec.js"
   },
   "repository": {
     "type": "git",
