@@ -36,15 +36,17 @@ function create() {
 
 function getExecutableFiles() {
   return fs.readdirSync(binPath)
-                  .filter(file => fs.statSync(path.join(binPath, file)).isFile())
-                  .map(name => {
-                    return { name, path: path.join(binPath, name) }
+                  .filter(filename => fs.statSync(path.join(binPath, filename)).isFile())
+                  .map(filename => {
+                    return { name: filename, path: path.join(binPath, filename) }
                   })
 }
 
 function getModuleRootPath() {
+  // NPM 2
   let rootPath = path.resolve(__dirname, 'node_modules', 'bento4-installer')
 
+  // NPM 3
   if(isDirectory(rootPath) === false) {
     rootPath = path.resolve(__dirname, '..')
   }
