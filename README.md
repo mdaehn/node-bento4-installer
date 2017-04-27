@@ -10,7 +10,7 @@ npm i --save bento4-installer
 When the `bento4-installer` is required, as seen below, it returns an object that has the paths to the platform specific executables.
 
 ```js
-const bento = require('bento-installer')
+const bento4 = require('bento-installer')
 ```
 The bento4 object returned has the following properties:
 
@@ -48,7 +48,7 @@ The bento4 object returned has the following properties:
   /* Is set to true if the OS platform and architecture is supported */
   isPlatformSupported,
 
-  /* Is sent to a string with the OS platform and architecture in the follow format: <platform>-<architecture>. For example, 'darwin-x64' */
+  /* Is sent to a string with the OS platform and architecture in the following format: <platform>-<architecture>. For example, 'darwin-x64' */
   platform
 }
 ```
