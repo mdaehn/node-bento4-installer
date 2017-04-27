@@ -7,7 +7,6 @@ const rootPath = getModuleRootPath()
 const binPath = path.resolve(rootPath, 'src/platforms', platform, 'bin')
 const packagePath = path.join(rootPath, 'package.json')
 const { version } = require(packagePath)
-console.log('/===>binPath=', binPath);
 const isPlatformSupported = isDirectory(binPath)
 const bento4 = create()
 
@@ -24,22 +23,31 @@ function create() {
 
   if(bento4.isPlatformSupported) {
     bento4.binPath = binPath
-    getExecutableFiles().forEach((file) => {
-      const endIndex = file.name.lastIndexOf('.exe')
-      const fileName = endIndex === -1 ? file.name : file.name.lastIndexOf(endIndex)
-      bento4[fileName] = file.path
-    })
+    getExecutableFiles()
+      .filter(file => !file.name.includes('Bento4'))
+      .forEach((file) => {
+        const executableName = removeFileExtension(file.name)
+        bento4[executableName] = file.path
+      })
   }
 
   return bento4
 }
 
+function removeFileExtension(filename) {
+  const endIndex = filename.lastIndexOf('.')
+  return endIndex === -1 ? filename : filename.lastIndexOf(endIndex)
+}
+
 function getExecutableFiles() {
   return fs.readdirSync(binPath)
-                  .filter(filename => fs.statSync(path.join(binPath, filename)).isFile())
-                  .map(filename => {
-                    return { name: filename, path: path.join(binPath, filename) }
-                  })
+          .filter(filename => fs.statSync(path.join(binPath, filename)).isFile())
+          .map(filename => {
+            return {
+              name: filename,
+              path: path.join(binPath, filename)
+            }
+          })
 }
 
 function getModuleRootPath() {
@@ -58,7 +66,7 @@ function isFile(file) {
     try {
         const stats = fs.statSync(file)
         return stats.isFile()
-    } catch (ignored) {
+    } catch (ignore) {
         return false
     }
 }
@@ -67,7 +75,7 @@ function isDirectory(dirPath) {
   try {
     const stats = fs.statSync(dirPath)
     return stats.isDirectory()
-  } catch(ignored) {
+  } catch(ignore) {
     return false
   }
 }
