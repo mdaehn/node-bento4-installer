@@ -48,7 +48,7 @@ The bento4 object returned has the following properties:
   /* Is set to true if the OS platform and architecture is supported */
   isPlatformSupported,
 
-  /* Is sent to a string with the OS platform and architecture in the following format: <platform>-<architecture>. For example, 'darwin-x64' */
+  /* Is set to a string with the OS platform and architecture in the following format: <platform>-<architecture>, for example, 'darwin-x64' */
   platform
 }
 ```
