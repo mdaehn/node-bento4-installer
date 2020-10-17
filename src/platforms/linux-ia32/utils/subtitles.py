@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 __author__    = 'Gilles Boccon-Gibod (bok@bok.net)'
-__copyright__ = 'Copyright 2011-2016 Axiomatic Systems, LLC.'
+__copyright__ = 'Copyright 2011-2020 Axiomatic Systems, LLC.'
 
 import xml.etree.ElementTree as ET
-import os.path
+import os.path as path
 from mp4utils import LanguageCodeMap, LanguageNames
 
 TTML_XML_NAMESPACE = 'http://www.w3.org/ns/ttml'
@@ -15,11 +14,11 @@ class SubtitlesFile:
         self.format          = None
 
         filename = media_source.filename
-        self.media_name = os.path.basename(filename)
+        self.media_name = path.basename(filename)
         if options.debug:
-            print 'Processing Subtitles file', filename
+            print('Processing Subtitles file', filename)
 
-        self.size = os.path.getsize(filename)
+        self.size = path.getsize(filename)
 
         self.language = media_source.spec.get('+language')
         self.language_name = 'Unknown'
@@ -49,7 +48,7 @@ class SubtitlesFile:
 
         if xml_root.tag != '{'+TTML_XML_NAMESPACE+'}tt':
             if options.debug:
-                print 'ERROR: no root level <tt> element found'
+                print('ERROR: no root level <tt> element found')
 
         # get the language
         language = xml_root.get('{'+XML_NAMESPACE+'}lang')
@@ -62,3 +61,8 @@ class SubtitlesFile:
     def parse_webvtt(self, options):
         self.format    = 'webvtt'
         self.mime_type = 'text/vtt'
+
+#############################################
+# Module Exports
+#############################################
+__all__ = ['SubtitlesFile']
