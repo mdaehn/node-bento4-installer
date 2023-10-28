@@ -3,7 +3,7 @@ const path = require('path')
 const os = require('os')
 
 const rootPath = getModuleRootPath()
-const platform = `${os.platform()}-${os.arch()}`
+const platform = getPlatform()
 const binPath = path.resolve(rootPath, 'src/platforms', platform, 'bin')
 const packagePath = path.join(rootPath, 'package.json')
 const packageJson = require(packagePath)
@@ -66,4 +66,8 @@ function isDirectory(dirPath) {
   } catch (ignore) {
     return false
   }
+}
+
+function getPlatform() {
+  return os.platform() === 'darwin' ? 'darwin' : `${os.platform()}-${os.arch()}`
 }
